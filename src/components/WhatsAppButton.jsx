@@ -19,7 +19,7 @@ const WhatsAppButton = () => {
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
     >
       <MessageCircle size={32} fill="white" className="text-white" />
-      <span className="absolute right-full mr-3 bg-white text-slate-800 px-3 py-1 rounded-lg text-sm font-medium shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+      <span className="absolute right-full mr-4 bg-clinic-primary text-white px-4 py-2 text-sm font-medium shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-serif tracking-wide">
         Chat on WhatsApp
       </span>
     </motion.a>

@@ -50,7 +50,7 @@ const Chatbot = () => {
     <>
       <motion.button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-24 right-6 z-40 bg-teal-600 text-white p-4 rounded-full shadow-lg hover:bg-teal-700 transition-colors ${isOpen ? 'hidden' : 'flex'}`}
+        className={`fixed bottom-24 right-6 z-40 bg-clinic-primary text-white p-4 rounded-full shadow-xl hover:bg-clinic-primary/90 transition-colors ${isOpen ? 'hidden' : 'flex'}`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
@@ -64,32 +64,32 @@ const Chatbot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[500px]"
+            className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-white shadow-2xl border border-clinic-primary/10 overflow-hidden flex flex-col max-h-[500px]"
           >
             {/* Header */}
-            <div className="bg-teal-600 p-4 flex justify-between items-center text-white">
-              <div className="flex items-center gap-2">
-                <div className="bg-white/20 p-1.5 rounded-full">
+            <div className="bg-clinic-primary p-4 flex justify-between items-center text-white">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/10 p-2 rounded-full">
                   <Bot size={20} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-sm">Tooth Club Assistant</h3>
-                  <p className="text-xs text-teal-100">Online</p>
+                  <h3 className="font-serif font-bold text-sm tracking-wide">Tooth Club Assistant</h3>
+                  <p className="text-xs text-white/60">Online</p>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="hover:bg-white/20 p-1 rounded transition-colors">
+              <button onClick={() => setIsOpen(false)} className="hover:bg-white/10 p-1 rounded transition-colors">
                 <X size={20} />
               </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 p-4 overflow-y-auto bg-slate-50 space-y-4 h-80">
+            <div className="flex-1 p-4 overflow-y-auto bg-clinic-bg space-y-4 h-80">
               {messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
+                  <div className={`max-w-[80%] p-3 text-sm leading-relaxed ${
                     msg.type === 'user' 
-                      ? 'bg-teal-600 text-white rounded-br-none' 
-                      : 'bg-white text-slate-700 shadow-sm border border-slate-100 rounded-bl-none'
+                      ? 'bg-clinic-secondary text-clinic-primary rounded-t-xl rounded-bl-xl font-medium' 
+                      : 'bg-white text-clinic-primary shadow-sm border border-clinic-primary/5 rounded-t-xl rounded-br-xl'
                   }`}>
                     {msg.text}
                   </div>
@@ -99,18 +99,18 @@ const Chatbot = () => {
             </div>
 
             {/* Input */}
-            <div className="p-3 bg-white border-t border-slate-100 flex gap-2">
+            <div className="p-3 bg-white border-t border-clinic-primary/10 flex gap-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Type a message..."
-                className="flex-1 px-4 py-2 bg-slate-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="flex-1 px-4 py-2 bg-clinic-bg border border-transparent focus:border-clinic-secondary/50 rounded-none text-sm focus:outline-none transition-colors text-clinic-primary placeholder-clinic-primary/40"
               />
               <button 
                 onClick={handleSend}
-                className="bg-teal-600 text-white p-2 rounded-full hover:bg-teal-700 transition-colors"
+                className="bg-clinic-primary text-white p-2 hover:bg-clinic-primary/90 transition-colors"
               >
                 <Send size={18} />
               </button>

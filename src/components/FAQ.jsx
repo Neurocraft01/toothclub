@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FAQ = () => {
   const faqs = [
@@ -21,32 +22,59 @@ const FAQ = () => {
     }
   ];
 
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
-        </div>
+    <section className="py-32 bg-clinic-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-12 gap-12">
+          <div className="md:col-span-4">
+            <span className="text-clinic-primary/60 font-medium tracking-widest uppercase text-sm mb-4 block">Common Questions</span>
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-clinic-primary mb-6">
+              Everything You Need to Know
+            </h2>
+            <p className="text-lg text-clinic-primary/70 mb-8">
+              Can't find the answer you're looking for? Please chat to our friendly team.
+            </p>
+            <a href="#contact" className="inline-block border-b border-clinic-primary text-clinic-primary pb-1 hover:text-clinic-secondary hover:border-clinic-secondary transition-colors">
+              Contact Support
+            </a>
+          </div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div key={index} className="border border-slate-200 rounded-xl overflow-hidden">
-              <button
-                className="w-full px-6 py-4 text-left flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              >
-                <span className="font-semibold text-slate-900">{faq.question}</span>
-                {openIndex === index ? <ChevronUp className="text-teal-600" /> : <ChevronDown className="text-slate-400" />}
-              </button>
-              {openIndex === index && (
-                <div className="px-6 py-4 bg-white text-slate-600 leading-relaxed border-t border-slate-100">
-                  {faq.answer}
+          <div className="md:col-span-8">
+            <div className="space-y-0">
+              {faqs.map((faq, index) => (
+                <div key={index} className="border-b border-clinic-primary/10">
+                  <button
+                    className="w-full py-8 text-left flex justify-between items-start group"
+                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  >
+                    <span className={`text-xl font-serif transition-colors ${openIndex === index ? 'text-clinic-secondary' : 'text-clinic-primary group-hover:text-clinic-secondary'}`}>
+                      {faq.question}
+                    </span>
+                    <span className={`ml-4 flex-shrink-0 transition-colors ${openIndex === index ? 'text-clinic-secondary' : 'text-clinic-primary/40 group-hover:text-clinic-secondary'}`}>
+                      {openIndex === index ? <Minus size={24} /> : <Plus size={24} />}
+                    </span>
+                  </button>
+                  <AnimatePresence>
+                    {openIndex === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="pb-8 text-clinic-primary/70 leading-relaxed text-lg">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              )}
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

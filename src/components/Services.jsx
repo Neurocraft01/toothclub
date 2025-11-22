@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 const Services = () => {
   const services = [
@@ -11,52 +12,49 @@ const Services = () => {
     { title: "Dental Implants", desc: "Permanent, natural-looking replacements for missing teeth to restore your smile." },
     { title: "Oral Surgery", desc: "Expert surgical care for extractions, implants, and other complex dental procedures." },
     { title: "Teeth Whitening", desc: "Professional whitening treatments for a brighter, more confident smile." },
-    { title: "Emergency Care", desc: "Prompt attention for dental emergencies. Call us immediately." },
   ];
 
   return (
-    <section id="services" className="py-24 bg-slate-50 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
-      <div className="absolute -left-20 top-40 w-64 h-64 bg-teal-100/40 rounded-full blur-3xl"></div>
-      <div className="absolute -right-20 bottom-40 w-64 h-64 bg-blue-100/40 rounded-full blur-3xl"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl lg:text-5xl font-bold text-slate-900 mb-4"
-          >
-            Our Services
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-lg text-slate-600 max-w-2xl mx-auto"
-          >
-            Comprehensive dental solutions tailored to your needs.
-          </motion.p>
+    <section id="services" className="py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20">
+          <div className="max-w-2xl">
+            <span className="text-clinic-secondary font-medium tracking-widest uppercase text-sm mb-4 block">Our Expertise</span>
+            <h2 className="text-4xl lg:text-6xl font-serif font-bold text-slate-900 leading-tight">
+              Comprehensive Care <br />
+              <span className="text-clinic-primary italic">Tailored to You</span>
+            </h2>
+          </div>
+          <p className="text-slate-600 max-w-md mt-6 md:mt-0 text-lg font-light">
+            From routine checkups to complex surgeries, we provide a full spectrum of dental treatments in a calming environment.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-l border-slate-200">
           {services.map((service, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group relative overflow-hidden"
+              transition={{ delay: index * 0.05 }}
+              className="group relative p-10 border-r border-b border-slate-200 hover:bg-clinic-primary transition-colors duration-500 h-full flex flex-col justify-between min-h-[320px]"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150"></div>
-              <div className="h-2 w-12 bg-teal-500 rounded-full mb-6 group-hover:w-20 transition-all relative z-10"></div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 relative z-10">{service.title}</h3>
-              <p className="text-slate-600 text-sm leading-relaxed relative z-10">{service.desc}</p>
+              <div className="flex justify-between items-start mb-6">
+                <span className="text-4xl font-serif text-slate-200 group-hover:text-white/20 transition-colors">
+                  {(index + 1).toString().padStart(2, '0')}
+                </span>
+                <ArrowUpRight className="text-slate-300 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100" />
+              </div>
+              
+              <div>
+                <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 group-hover:text-white transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed group-hover:text-white/80 transition-colors font-light">
+                  {service.desc}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
